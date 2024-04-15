@@ -50,7 +50,7 @@ This repository contains Docker configurations for several applications. Each ap
 
 #### [Minecraft Server](./docker/minecraftserver)
 - **Description:** Minecraft Server is a sandbox video game where players can build and explore virtual worlds.
-- **Documentation:** [Minecraft Server Documentation](https://minecraft.gamepedia.com/Server)
+- **Documentation:** [Minecraft Server Documentation](https://docker-minecraft-server.readthedocs.io/en/latest/)
 
 #### [Pi-hole](./docker/pihole)
 - **Description:** Pi-hole is a network-wide ad blocker that improves your internet experience.
