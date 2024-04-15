@@ -1,0 +1,44 @@
+version: '3.1'
+
+services:
+
+  ghost:
+    image: ghost:5-alpine
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ghost.rule=Host(`blog.georgijs.dev`)"
+      - "traefik.http.routers.ghost.entrypoints=https"
+      - "traefik.http.routers.ghost.tls=true"
+      - "traefik.http.services.ghost.loadbalancer.server.port=2368"
+    environment:
+      # see https://ghost.org/docs/config/#configuration-options
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+      # this url value is just an example, and is likely wrong for your environment!
+      url: https://blog.georgijs.dev
+    volumes:
+      - ghost_data:/var/lib/ghost/content
+    networks:
+      - proxy
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  ghost_data:
+  db_data:
